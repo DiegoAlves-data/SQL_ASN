@@ -41,3 +41,37 @@ FROM bronze_olist.olist_products_dataset
 WHERE product_category_name = 'perfumaria'
    OR product_category_name = 'bebes'
   AND product_height_cm > '5'
+
+-- COMMAND ----------
+
+-- TEMPO DE FOCO
+-- 1. Lista de pedidos com mais de um item.
+SELECT *
+FROM bronze_olist.olist_order_items_dataset
+WHERE order_item_id > 1
+
+-- COMMAND ----------
+
+-- 2. Lista de pedidos que o frete é mais caro que o item
+SELECT *
+FROM bronze_olist.olist_order_items_dataset
+WHERE freight_value > price
+
+-- COMMAND ----------
+
+--3. Lista de pedidos que ainda não foram enviados.
+SELECT * 
+FROM bronze_olist.olist_orders_dataset
+WHERE order_status != 'delivered'
+  AND order_status != 'shipped'
+
+-- COMMAND ----------
+
+--4. Lista de pedidos que foram entregues com atraso.
+SELECT * 
+FROM bronze_olist.olist_orders_dataset
+WHERE order_estimated_delivery_date < order_delivered_customer_date
+
+-- COMMAND ----------
+
+

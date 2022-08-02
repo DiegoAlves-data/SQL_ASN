@@ -22,8 +22,7 @@ FROM bronze_olist.olist_sellers_dataset
 SELECT *
 FROM bronze_olist.olist_sellers_dataset
 WHERE seller_city = 'rio de janeiro'
-  AND
-      seller_state = 'SP'
+   OR seller_state = 'SP'
 
 -- COMMAND ----------
 
@@ -38,9 +37,17 @@ WHERE seller_city = 'rio de janeiro'
 -- Selecione produtos de perfumaria e bebes com altura maior que 5cm
 SELECT *
 FROM bronze_olist.olist_products_dataset
-WHERE product_category_name = 'perfumaria'
-   OR product_category_name = 'bebes'
+WHERE (product_category_name = 'perfumaria'
+   OR product_category_name = 'bebes')
   AND product_height_cm > '5'
+
+-- COMMAND ----------
+
+-- OUTRA FORMA DE SOLUCIONAR Selecione produtos de perfumaria e bebes com altura maior que 5cm
+SELECT *
+FROM bronze_olist.olist_products_dataset
+WHERE product_category_name in ('perfumaria', 'bebes', 'artes')
+  AND product_height_cm > '5' 
 
 -- COMMAND ----------
 
